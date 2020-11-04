@@ -1,5 +1,5 @@
-import func.statistics_label
-import func.movefile
-import func.process
+import func.statistics
 
-statistics_label = func.statistics_label.Collecte
+
+statistics_label = func.statistics.Collecte
+Modify = func.Modify.Modify
