@@ -32,7 +32,7 @@ def move_file_num(oriDir,newDir1,txtpath,newDir_label):
     label_file = os.listdir(txtpath)
     # print(len(label_file))
 
-    file_list = ['train' ,'valid']
+    file_list = ['train' ,'valid','test']
     for file in file_list:
         if not os.path.exists(newDir_label+'/'+file):
             os.makedirs(newDir_label+'/'+file)
@@ -46,13 +46,16 @@ def move_file_num(oriDir,newDir1,txtpath,newDir_label):
         jpg_name = file.strip().split('.')[0] +'.jpg'
         jpg_path = os.path.join(oriDir,jpg_name)
 
-        if i < 0.9 * len(label_file):
-            des_path = os.path.join(newDir_label , '/train/')
-            des_path_img = os.path.join(newDir1 , '/train/' )
+        if i < 0.6 * len(label_file):
+            des_path = newDir_label + '/train/'
+            des_path_img = newDir1 + '/train/'
+        elif 0.6<= i < 0.8 * len(label_file):
+            des_path = newDir_label + '/valid/'
+            des_path_img = newDir1 + '/valid/'
         else:
-            des_path = os.path.join(newDir_label , '/valid/')
-            des_path_img = os.path.join(newDir1 , '/valid/')
-        if os.path.exists(des_path + file):
+            des_path = newDir_label + '/test/'
+            des_path_img = newDir1 + '/test/'
+        if os.path.exists(des_path + file) and os.path.exists(des_path_img + file):
             continue
 
         shutil.move(ori_path, des_path)
